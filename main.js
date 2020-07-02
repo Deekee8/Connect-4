@@ -1,20 +1,6 @@
 /*
-We got help from Randy's demo code, Tim La, and Nikal Morgan
-1. Initialize the game
-    - players
-    - board display
-    - board model
-    - current player tracker
-    - click handlers for each column
-2. Take player input
-    - know which player is dropping a disc
-    - which column are we dropping into?
-    - is that column already full?
-    - drop the disc into the top of the column
-3. Check for game end conditions
-    - tie
-    - win
-    - announce that the game is over
+We got help from Randy's demo code, Tim La, Drew Sexton, Nikal Morgan, and 7/1 Evening Study Hall.
+
 
 */
 
@@ -27,7 +13,7 @@ const boardModel = [
     [0, 0, 0, 0, 0, 0, 0]
 ]
 console.log(boardModel)
-let currentPlayer = 1 // 1 or 2
+let currentPlayer = 1 
 let numberOfDiscsDropped = 0
 
 
@@ -43,20 +29,67 @@ const displayMessage = function (currentPlayer) {
     document.getElementById('message').innerHTML = currentPlayer;
 }
 
-let board = document.getElementById('board')
-const isGameOver = function (model) {
-    for (let i = 0; i < boardModel.length; i++) { }
-    // Check for a tie (numberofDiscsDropped === 42)
-    return false // false, "tie", "win"
+
+const winnerVertical = function (boardModel) {
+    for (let rowNum = 0; rowNum < 3; rowNum++) {
+        for (let colNum = 0; colNum < boardModel[rowNum].length; colNum++) {
+            if (boardModel[rowNum][colNum] === boardModel[rowNum + 1][colNum] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum + 2][colNum] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum + 3][colNum] &&
+                boardModel[rowNum][colNum] !== 0) {
+                console.log("win")
+                return true
+            }
+        }
+    }
+    return false
 }
 
-const displayTieMessage = function () {
-    displayMessage("Tie game!")
+const winnerHorizontal = function (boardModel) {
+    for (let rowNum = 0; rowNum < boardModel.length; rowNum++) {
+        for (let colNum = 0; colNum < 4; colNum++) {
+            if (boardModel[rowNum][colNum] === boardModel[rowNum][colNum + 1] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum][colNum + 2] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum][colNum + 3] &&
+                boardModel[rowNum][colNum] !== 0) {
+                console.log("win")
+                return true
+            }
+        }
+    }
+    return false
 }
 
-const displayWinMessage = function () {
-    displayMessage("Winner is _____")
+const winnerDiagonalUp = function (boardModel) {
+    for (let rowNum = 3; rowNum < boardModel.length; rowNum++) {
+        for (let colNum = 0; colNum < boardModel[rowNum].length; colNum++) {
+            if (boardModel[rowNum][colNum] === boardModel[rowNum - 1][colNum + 1] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum - 2][colNum + 2] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum - 3][colNum + 3] &&
+                boardModel[rowNum][colNum] !== 0) {
+                console.log(boardModel[rowNum][colNum])
+                return true
+            }
+        }
+    }
+    return false
 }
+
+const winnerDiagonalDown = function (boardModel) {
+    for (let rowNum = 0; rowNum < 3; rowNum++) {
+        for (let colNum = 0; colNum < 4; colNum++) {
+            if (boardModel[rowNum][colNum] === boardModel[rowNum + 1][colNum + 1] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum + 2][colNum + 2] &&
+                boardModel[rowNum][colNum] === boardModel[rowNum + 3][colNum + 3] &&
+                boardModel[rowNum][colNum] !== 0) {
+                console.log(boardModel[rowNum][colNum])
+                return true
+            }
+        }
+    }
+    return false
+}
+
 
 let newDisc
 const columnClickHandler = function (eventObj) {
@@ -67,11 +100,6 @@ const columnClickHandler = function (eventObj) {
             newDisc = document.createElement('div')
             newDisc.setAttribute('class', 'redDisc')
             selectedCol.appendChild(newDisc)
-            currentPlayer = 2
-            displayCurrentPlayer(currentPlayer)
-            numberOfDiscsDropped++
-            // console.log(selectedCol.childElementCount)
-            // console.log(columnNum)
             let splicePosition = Number(selectedCol.childElementCount)
             switch (splicePosition) {
                 case 1:
@@ -93,16 +121,31 @@ const columnClickHandler = function (eventObj) {
                     boardModel[0][columnNum] = 1
                     break;
             }
+            if (winnerVertical(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerHorizontal(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerDiagonalUp(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerDiagonalDown(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            } else {
+                currentPlayer = 2
+                displayCurrentPlayer(currentPlayer)
+                numberOfDiscsDropped++
+            }
+
+            if (numberOfDiscsDropped === 42) {
+                document.getElementById('message').innerHTML = "It's a draw"
+            }
 
         } else {
             newDisc = document.createElement('div')
             newDisc.setAttribute('class', 'blackDisc')
             selectedCol.appendChild(newDisc)
-            currentPlayer = 1
-            displayCurrentPlayer(currentPlayer)
-            numberOfDiscsDropped++
-            // console.log(selectedCol.childElementCount)
-            // console.log(columnNum)
             let splicePosition = Number(selectedCol.childElementCount)
             switch (splicePosition) {
                 case 1:
@@ -124,30 +167,59 @@ const columnClickHandler = function (eventObj) {
                     boardModel[0][columnNum] = 2
                     break;
             }
+            if (winnerVertical(boardModel) === true) {
+                console.log(currentPlayer + 'wins')
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerHorizontal(boardModel) === true) {
+                console.log(currentPlayer + 'wins')
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerDiagonalUp(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            }
+            else if (winnerDiagonalDown(boardModel) === true) {
+                displayWinMessage(currentPlayer)
+            } else {
+                currentPlayer = 1
+                displayCurrentPlayer(currentPlayer)
+                numberOfDiscsDropped++
+            }
+
+            if (numberOfDiscsDropped === 42) {
+                document.getElementById('message').innerHTML = "It's a draw"
+            }
+
         }
     } else {
         displayMessage("This column is full. Choose another.")
     }
-    
-    console.log(boardModel)
-
-    // console.log("Hi" + columnNum)
-    // if (isColumnFull(columnNum)) {
-
-    // } else {
-
-    //     const gameStatus = isGameOver(boardModel)
-    //     if (gameStatus === "tie") {
-    //         displayTieMessage()
-    //     } else if (gameStatus === "win") {
-    //         displayWinMessage()
-    //     }
-    // }
 }
+
+// console.log("Hi" + columnNum)
+
+// } else {
+
+//     const gameStatus = isGameOver(boardModel)
+//     if (gameStatus === "tie") {
+//         displayTieMessage()
+//     } else if (gameStatus === "win") {
+//         displayWinMessage()
+//     }
+// }
+
+// console.log(boardModel)
 const displayCurrentPlayer = function (currentPlayer) {
     displayMessage("Current player: " + currentPlayer)
 }
+const displayTieMessage = function () {
+    displayMessage("Tie game!")
+}
 
+const displayWinMessage = function (currentPlayer) {
+    displayMessage("Winner is Player " + currentPlayer)
+    // document.getElementById('endgame').innerHTML = "Winner is Player " + currentPlayer
+}
 const setUpEventListeners = function () {
     col0.addEventListener('click', columnClickHandler)
     col1.addEventListener('click', columnClickHandler)

@@ -1,4 +1,4 @@
-/* :root{
+:root{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,6 +7,7 @@
 h1{
   text-align: center
 }
+
 
 
 /* #board{
@@ -34,16 +35,25 @@ h1{
   }
   
   #body {
+    background-color: rebeccapurple;
     
   }
   
   #board {
+    margin-left: auto;
+    margin-right: auto;
     background-color: aqua;
-    height: 400px;
+    height: 365px;
     width: 490px;
     display: flex;
+    border: 1px solid black;
+    box-shadow: 5px 5px darkgrey;
+    border-bottom: 5px 5px black;
   }
   
+  #message{
+    margin-left: 42%;
+  }
   .redDisc {
     background-color: red;
     width: 60px;
@@ -59,6 +69,10 @@ h1{
     align-items: center;
   }
   
+  .column:hover{
+    background-color: pink;
+  }
+
   .blackDisc {
     background-color: black;
     width: 60px;
