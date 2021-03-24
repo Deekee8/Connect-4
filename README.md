@@ -7,7 +7,7 @@
 
 ## Author
 
-👤 **DeQuan Mitchell, Dessance Chandler, Daniel Drevitch, Amy Bartlemay**
+👤 **DeQuan Mitchell, Dessance Chandler, Daniel Drevitch, Lawrence Smith, Amy Bartlemay**
 
 * Twitter: [@devDeQuan](https://twitter.com/devDeQuan)
 * Github: [@Deekee8](https://github.com/Deekee8)
