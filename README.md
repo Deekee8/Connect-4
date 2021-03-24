@@ -1,27 +1,22 @@
-https://dequanmitchell.gitlab.io/connect4
+# Welcome to Connect-4 👋
+[![Twitter: devDeQuan](https://img.shields.io/twitter/follow/devDeQuan.svg?style=social)](https://twitter.com/devDeQuan)
 
-Group Members:
-DeQuan Mitchell
-Daniel Drevitch
-Amy Bartlemay
-Lawrence Smith
+> The classic 2-player Connect $ game. This was a group project I contributed to as part of Kenzie Avademy's Software Engineering Certification program.
 
-*Development Plan*
-1. read the assessment
-2. make a grid with rows and columns
-    a. 7 columns
-    b. 6 rows
-3. make 2 players
-    a. display a red disk to start
-    b. take turns (toggle disk colors)
-    c. keep track of the colors at the positions on board
-4. winning conditions (or tie)
-    a. 4 in a row vertically
-    b. horizontally
-    c. diagonally
-        1)upward
-        2)downward
-5. click, pick up, and drop pieces
-    a. click handler for each of the 7 columns to add disks
-    b. animation for falling pieces
-    c. full column condition (no more)
+### ✨ [Demo](https://deekee8.github.io/Connect-4/)
+
+## Author
+
+👤 **DeQuan Mitchell, Dessance Chandler, Daniel Drevitch, Amy Bartlemay**
+
+* Twitter: [@devDeQuan](https://twitter.com/devDeQuan)
+* Github: [@Deekee8](https://github.com/Deekee8)
+* LinkedIn: [@dequanmitchell](https://linkedin.com/in/dequanmitchell)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
