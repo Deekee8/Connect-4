@@ -12,7 +12,6 @@ const boardModel = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0]
 ]
-console.log(boardModel)
 let currentPlayer = 1 
 let numberOfDiscsDropped = 0
 
@@ -37,7 +36,6 @@ const winnerVertical = function (boardModel) {
                 boardModel[rowNum][colNum] === boardModel[rowNum + 2][colNum] &&
                 boardModel[rowNum][colNum] === boardModel[rowNum + 3][colNum] &&
                 boardModel[rowNum][colNum] !== 0) {
-                console.log("win")
                 return true
             }
         }
@@ -52,7 +50,6 @@ const winnerHorizontal = function (boardModel) {
                 boardModel[rowNum][colNum] === boardModel[rowNum][colNum + 2] &&
                 boardModel[rowNum][colNum] === boardModel[rowNum][colNum + 3] &&
                 boardModel[rowNum][colNum] !== 0) {
-                console.log("win")
                 return true
             }
         }
@@ -67,7 +64,6 @@ const winnerDiagonalUp = function (boardModel) {
                 boardModel[rowNum][colNum] === boardModel[rowNum - 2][colNum + 2] &&
                 boardModel[rowNum][colNum] === boardModel[rowNum - 3][colNum + 3] &&
                 boardModel[rowNum][colNum] !== 0) {
-                console.log(boardModel[rowNum][colNum])
                 return true
             }
         }
@@ -82,7 +78,6 @@ const winnerDiagonalDown = function (boardModel) {
                 boardModel[rowNum][colNum] === boardModel[rowNum + 2][colNum + 2] &&
                 boardModel[rowNum][colNum] === boardModel[rowNum + 3][colNum + 3] &&
                 boardModel[rowNum][colNum] !== 0) {
-                console.log(boardModel[rowNum][colNum])
                 return true
             }
         }
@@ -168,11 +163,9 @@ const columnClickHandler = function (eventObj) {
                     break;
             }
             if (winnerVertical(boardModel) === true) {
-                console.log(currentPlayer + 'wins')
                 displayWinMessage(currentPlayer)
             }
             else if (winnerHorizontal(boardModel) === true) {
-                console.log(currentPlayer + 'wins')
                 displayWinMessage(currentPlayer)
             }
             else if (winnerDiagonalUp(boardModel) === true) {
@@ -196,19 +189,6 @@ const columnClickHandler = function (eventObj) {
     }
 }
 
-// console.log("Hi" + columnNum)
-
-// } else {
-
-//     const gameStatus = isGameOver(boardModel)
-//     if (gameStatus === "tie") {
-//         displayTieMessage()
-//     } else if (gameStatus === "win") {
-//         displayWinMessage()
-//     }
-// }
-
-// console.log(boardModel)
 const displayCurrentPlayer = function (currentPlayer) {
     displayMessage("Current player: " + currentPlayer)
 }
@@ -218,8 +198,8 @@ const displayTieMessage = function () {
 
 const displayWinMessage = function (currentPlayer) {
     displayMessage("Winner is Player " + currentPlayer)
-    // document.getElementById('endgame').innerHTML = "Winner is Player " + currentPlayer
 }
+
 const setUpEventListeners = function () {
     col0.addEventListener('click', columnClickHandler)
     col1.addEventListener('click', columnClickHandler)
