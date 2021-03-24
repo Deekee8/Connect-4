@@ -1,7 +1,7 @@
 # Welcome to Connect-4 👋
 [![Twitter: devDeQuan](https://img.shields.io/twitter/follow/devDeQuan.svg?style=social)](https://twitter.com/devDeQuan)
 
-> The classic 2-player Connect $ game. This was a group project I contributed to as part of Kenzie Avademy's Software Engineering Certification program.
+> The classic 2-player Connect 4 game. This was a group project I contributed to as part of Kenzie Avademy's Software Engineering Certification program. I was the Project Manager for this project.
 
 ### ✨ [Demo](https://deekee8.github.io/Connect-4/)
 
